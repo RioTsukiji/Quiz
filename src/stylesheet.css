@@ -61,14 +61,11 @@ h2{
     height: 282px;
 }
 
-.choices-box{
-    border-radius: 16px;
-}
-
 .choice{
     width: 347px;
     height: 60px;
     background: #F4EDE6;
+    border-radius: 16px;
 }
 
 .modal__overlay{

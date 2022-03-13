@@ -1,18 +1,20 @@
 import React, {useState} from "react";
+import { ChoiceProps } from './interface/components'
 
-export default function Choices(){
-    const [modal, setModal] = useState(false)
+export default function Choice(props:ChoiceProps){
+    const {checkAnswer,choices}=props;
+
     return(
-        <div className='choice-box'>
-            <div className='choice' onClick={()=>setModal(true)}>
-                <p>{this.props.name}</p>
-            </div>
-            <div className={`modal_overlay ${modal && "is-opened"}`}>
-                <div className="modal_box">
-                    <button className="modal_closeBtn" onClick={()=>setModal(false)}>×</button>
-                    <div>モーダルテキスト</div>
-                </div>
-            </div>
+        <div className='choices-container'>
+            {choices.map((val)=>{
+                return(
+                        <button
+                            key={val.answer_text}
+                            className='choice'
+                            title={val.answer_text}
+                            onPress={() => checkAnswer(val.correct)}/>
+                );
+            })}
         </div>
     );
 }
