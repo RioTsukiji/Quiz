@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 
 export interface Problem {
     choices: Choice[];
@@ -6,7 +5,7 @@ export interface Problem {
 }
 
 export interface Choice {
-    answer_text: string;
+    answer: string;
     correct: boolean;
     question_id: string;
 }
@@ -15,5 +14,3 @@ export interface Question {
     id: string;
     question: string;
 }
-
-export type SelectionFromFirestore = firebase.firestore.QuerySnapshot<Selection>;

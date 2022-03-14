@@ -1,7 +1,3 @@
-import {
-    NavigationProp,
-    ParamListBase,
-} from '@react-navigation/native';
 import { Choice } from './models';
 
 export interface ChoiceProps {
@@ -14,17 +10,7 @@ export interface QuestionProps {
 }
 
 export interface AnswerProps {
-    navigation: NavigationProp<ParamListBase, string, any, any>;
     route: any;
-}
-
-export interface ResultProps {
-    navigation: NavigationProp<ParamListBase, string, any, any>;
-    route: any;
-}
-
-export interface TitleProps {
-    navigation: NavigationProp<ParamListBase, string, any, any>
 }
 
 export interface JudgmentProps {
