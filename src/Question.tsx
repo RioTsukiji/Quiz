@@ -3,7 +3,7 @@ import db from "../firebase";
 import {QuestionProps} from "./interface/components";
 import {collection,getDocs} from "firebase/firestore";
 
-export default function Question(question: QuestionProps){
+export default function Question(){
     const [questions,setQuestions]=useState([]);
 
     /*useEffect(()=>{
@@ -16,7 +16,7 @@ export default function Question(question: QuestionProps){
     return (
         <div className='question-container'>
             <h1>Quiz</h1>
-            <h2>{questions.question}</h2>
+            <h2>Q. What is the most efficient way to solve global warming problems.</h2>
         </div>
     );
 }

@@ -4,13 +4,12 @@ import db from "../firebase";
 import {QuestionProps} from "./interface/components";
 import {collection,getDocs} from "firebase/firestore";
 
-export default function Choice(props:ChoiceProps){
-    const {checkAnswer,choices}=props;
+export default function Choice(){
+    //const {checkAnswer,choices}=props;
     const [show,setShow]=useState(false);
     const [choice,setChoice]=useState([]);
 
-    const Judgment = (props: JudgmentProps) => {
-        const { correct } = props;
+    const Judgment = () => {
 
         /*useEffect(()=>{
             const questionData = collection(db,"choices");
@@ -22,15 +21,15 @@ export default function Choice(props:ChoiceProps){
         if(show) {
             return (
                 <div id="overlay" className="Judgement">
-                    {correct ?
-                        <div className="container">
-                            <h2>正解</h2>
-                        </div>
-                        :
-                        <div className="container">
-                            <h2>不正解</h2>
-                        </div>
-                    }
+                    <h1>正解</h1>
+                    <button
+                        //key={val.answer}
+                        className='modal__closeBtn'
+                        title="close"
+                        onClick={() => { setShow(false) }}
+                    >
+                        close
+                    </button>
                 </div>
             )
         }else{
@@ -39,19 +38,42 @@ export default function Choice(props:ChoiceProps){
     };
 
     return(
+        <>
         <div className='choices-container'>
-            {choices.map((val)=>{
-                return(
-                        <>
                         <button
-                            key={val.answer}
+                            //key={val.answer}
                             className='choice'
-                            title={val.answer}
-                            onClick={() => {checkAnswer(val.correct); setShow(true)}}/>
-                        <Judgment correct={val.correct}/>
-                        </>
-                );
-            })}
+                            title="a"
+                            onClick={() => { setShow(true) }}
+                        >
+                            a
+                        </button>
+                        <button
+                            //key={val.answer}
+                            className='choice'
+                            title="b"
+                            onClick={() => { setShow(true) }}
+                        >
+                        b
+                        </button>
+                        <button
+                            //key={val.answer}
+                            className='choice'
+                            title="c"
+                            onClick={() => { setShow(true) }}
+                        >
+                        c
+                        </button>
+                        <button
+                            //key={val.answer}
+                            className='choice'
+                            title="d"
+                            onClick={() => { setShow(true) }}
+                        >
+                        d
+                        </button>
         </div>
+            <Judgment/>
+        </>
     );
 }

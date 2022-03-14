@@ -1,22 +1,20 @@
 import React from 'react';
-import './App.css';
+import './stylesheet.css';
 import Choice from './Choices'
 import { useState, useEffect } from 'react';
 import Question from "./Question";
 import { Problem } from './interface/models';
-import { AnswerProps } from './interface/components';
 
 
 
-function App(props:AnswerProps) {
-    const { route } = props;
+function App() {
 
     const [correct, setCorrect] = useState(false);
     const [visible, setVisible] = useState(false);
     const [last, setLast] = useState(false);
     const [count, setCount] = useState(0);
     const [correctCount, setCorrectCount] = useState(0);
-    const [questions] = useState<Problem[]>(route.params.props);
+    //const [questions] = useState<Problem[]>(route.params.props);
 
     const checkAnswer = (flag: boolean) => {
         if (flag) {
@@ -28,8 +26,8 @@ function App(props:AnswerProps) {
 
   return (
     <div className="App">
-            <Question questionText={questions[count].question}/>
-            <Choice choices={questions[count].choices} checkAnswer={checkAnswer}/>
+            <Question/>
+            <Choice/>
     </div>
   );
 }

@@ -9,10 +9,6 @@ export interface QuestionProps {
     questionText: string;
 }
 
-export interface AnswerProps {
-    route: any;
-}
-
 export interface JudgmentProps {
     correct: boolean;
 }
