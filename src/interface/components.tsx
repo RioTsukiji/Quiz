@@ -12,3 +12,7 @@ export interface QuestionProps {
 export interface JudgmentProps {
     correct: boolean;
 }
+
+export interface Number{
+    number: number;
+}

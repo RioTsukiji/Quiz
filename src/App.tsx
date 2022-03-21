@@ -4,10 +4,11 @@ import Choice from './Choices'
 import { useState, useEffect } from 'react';
 import Question from "./Question";
 import { Problem } from './interface/models';
-
-
+import {questions} from "./data";
 
 function App() {
+
+    const number = Math.floor(Math.random()*2);
 
     const [correct, setCorrect] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -26,11 +27,10 @@ function App() {
 
   return (
     <div className="App">
-            <Question/>
-            <Choice/>
+            <Question number={number}/>
+            <Choice number={number}/>
     </div>
   );
 }
 
 export default App;
-

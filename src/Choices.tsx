@@ -1,36 +1,45 @@
-import React, {useEffect,useState} from "react";
-import {ChoiceProps, JudgmentProps} from './interface/components'
-import db from "../firebase";
-import {QuestionProps} from "./interface/components";
-import {collection,getDocs} from "firebase/firestore";
+import React, {useState} from "react";
+import {questions} from "./data";
 
-export default function Choice(){
-    //const {checkAnswer,choices}=props;
+type Props={
+    number:number;
+}
+
+const Choice: React.FC<Props> = (props) =>{
     const [show,setShow]=useState(false);
-    const [choice,setChoice]=useState([]);
+    let tfNumber = 0 ;
 
     const Judgment = () => {
-
-        /*useEffect(()=>{
-            const questionData = collection(db,"choices");
-            getDocs(questionData).then((snapShot)=> {
-                setChoice(snapShot.docs.map((doc) => ({...doc.data()})));
-            });
-        },[]);*/
-
         if(show) {
             return (
-                <div id="overlay" className="Judgement">
-                    <h1>正解</h1>
-                    <button
-                        //key={val.answer}
-                        className='modal__closeBtn'
-                        title="close"
-                        onClick={() => { setShow(false) }}
-                    >
-                        close
-                    </button>
-                </div>
+                    questions[props.number][tfNumber].tf ?
+                        <div id="overlay" className="Judgement">
+                            <h1>正解</h1>
+                            <button
+                                //key={val.answer}
+                                className='modal__closeBtn'
+                                title="close"
+                                onClick={() => {
+                                    setShow(false)
+                                }}
+                            >
+                                close
+                            </button>
+                        </div>
+                        :
+                        <div id="overlay" className="Judgement">
+                            <h1>不正解</h1>
+                            <button
+                                //key={val.answer}
+                                className='modal__closeBtn'
+                                title="close"
+                                onClick={() => {
+                                    setShow(false)
+                                }}
+                            >
+                                close
+                            </button>
+                        </div>
             )
         }else{
             return null;
@@ -44,36 +53,38 @@ export default function Choice(){
                             //key={val.answer}
                             className='choice'
                             title="a"
-                            onClick={() => { setShow(true) }}
+                            onClick={() => { setShow(true); tfNumber += 1; }}
                         >
-                            a
+                            {questions[props.number][1].choice}
                         </button>
                         <button
                             //key={val.answer}
                             className='choice'
                             title="b"
-                            onClick={() => { setShow(true) }}
+                            onClick={() => { setShow(true); tfNumber += 2; }}
                         >
-                        b
+                            {questions[props.number][2].choice}
                         </button>
                         <button
                             //key={val.answer}
                             className='choice'
                             title="c"
-                            onClick={() => { setShow(true) }}
+                            onClick={() => { setShow(true); tfNumber += 3; }}
                         >
-                        c
+                            {questions[props.number][3].choice}
                         </button>
                         <button
                             //key={val.answer}
                             className='choice'
                             title="d"
-                            onClick={() => { setShow(true) }}
+                            onClick={() => { setShow(true); tfNumber += 4; }}
                         >
-                        d
+                            {questions[props.number][4].choice}
                         </button>
         </div>
             <Judgment/>
         </>
     );
 }
+
+export default Choice;
