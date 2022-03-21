@@ -11,7 +11,7 @@ const Choice: React.FC<Props> = (props) =>{
 
     const Judgment = () => {
         if(show) {
-            if(questions[props.number][tfNumber].choice===questions[props.number][5].answer){
+            if(questions[props.number][tfNumber].tf===true){
                     return(
                         <div id="overlay" className="Judgement">
                             <h1>正解</h1>
