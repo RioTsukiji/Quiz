@@ -7,7 +7,7 @@ type Props={
 
 const Choice: React.FC<Props> = (props) =>{
     const [show,setShow]=useState(false);
-    let tfNumber = 0 ;
+    const [tfNumber,setTfNumber]=useState(0);
 
     const Judgment = () => {
         if(show) {
@@ -56,7 +56,7 @@ const Choice: React.FC<Props> = (props) =>{
                             //key={val.answer}
                             className='choice'
                             title="a"
-                            onClick={() => { setShow(true); tfNumber = 1; }}
+                            onClick={() => { setShow(true); setTfNumber(tfNumber+1); }}
                         >
                             {questions[props.number][1].choice}
                         </button>
@@ -64,7 +64,7 @@ const Choice: React.FC<Props> = (props) =>{
                             //key={val.answer}
                             className='choice'
                             title="b"
-                            onClick={() => { setShow(true); tfNumber = 2; }}
+                            onClick={() => { setShow(true); setTfNumber(tfNumber+2); }}
                         >
                             {questions[props.number][2].choice}
                         </button>
@@ -72,7 +72,7 @@ const Choice: React.FC<Props> = (props) =>{
                             //key={val.answer}
                             className='choice'
                             title="c"
-                            onClick={() => { setShow(true); tfNumber = 3; }}
+                            onClick={() => { setShow(true); setTfNumber(tfNumber+3); }}
                         >
                             {questions[props.number][3].choice}
                         </button>
@@ -80,7 +80,7 @@ const Choice: React.FC<Props> = (props) =>{
                             //key={val.answer}
                             className='choice'
                             title="d"
-                            onClick={() => { setShow(true); tfNumber = 4; }}
+                            onClick={() => { setShow(true); setTfNumber(tfNumber+4); }}
                         >
                             {questions[props.number][4].choice}
                         </button>
