@@ -27,7 +27,27 @@ h2{
     width: 256px;
     height: 70px;
     left: 60px;
-    top: 256px;
+    top: 200px;
+
+    font-family: Prata;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #1A1713;
+
+}
+
+h3{
+    position: absolute;
+    width: 256px;
+    height: 70px;
+    left: 60px;
+    top: 300px;
 
     font-family: Prata;
     font-style: normal;
