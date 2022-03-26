@@ -3,19 +3,29 @@ import './stylesheet.css';
 import Choice from './Choices'
 import { useState, useEffect } from 'react';
 import Question from "./Question";
-import { Problem } from './interface/models';
-import {questions} from "./data";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+export const Number = React.createContext(
+    {} as {
+        number: number
+        setNumber: React.Dispatch<React.SetStateAction<number>>
+    }
+);
 
-    const number = Math.floor(Math.random()*2);
+const App: React.FC = () => {
 
-  return (
-    <div className="App">
-            <Question number={number}/>
-            <Choice number={number}/>
-    </div>
-  );
+    const [number, setNumber] = useState(0);
+    const value = {
+        number,
+        setNumber,
+    };
+
+    return (
+        <Number.Provider value={{ number, setNumber }}>
+            <Question number={number} />
+            <Choice number={number} />
+        </Number.Provider>
+    );
 }
 
 export default App;
