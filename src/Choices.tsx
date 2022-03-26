@@ -1,57 +1,107 @@
-import React, {useEffect,useState} from "react";
-import {ChoiceProps, JudgmentProps} from './interface/components'
-import db from "../firebase";
-import {QuestionProps} from "./interface/components";
-import {collection,getDocs} from "firebase/firestore";
+import React, { useState , useContext} from "react";
+import { questions } from "./data";
+import {Number} from "./App";
 
-export default function Choice(props:ChoiceProps){
-    const {checkAnswer,choices}=props;
-    const [show,setShow]=useState(false);
-    const [choice,setChoice]=useState([]);
+type Props = {
+    number: number;
+}
 
-    const Judgment = (props: JudgmentProps) => {
-        const { correct } = props;
+const Choice: React.FC<Props> = (props) => {
+    const [show, setShow] = useState(false);
+    const [tfNumber, setTfNumber] = useState(0);
+    const { number, setNumber } = useContext(Number);
 
-        /*useEffect(()=>{
-            const questionData = collection(db,"choices");
-            getDocs(questionData).then((snapShot)=> {
-                setChoice(snapShot.docs.map((doc) => ({...doc.data()})));
-            });
-        },[]);*/
 
-        if(show) {
-            return (
-                <div id="overlay" className="Judgement">
-                    {correct ?
-                        <div className="container">
-                            <h2>正解</h2>
-                        </div>
-                        :
-                        <div className="container">
-                            <h2>不正解</h2>
-                        </div>
-                    }
-                </div>
-            )
-        }else{
+    const Judgment = () => {
+        if (show) {
+            if (questions[props.number][tfNumber].tf === true) {
+                return (
+                    <div id="overlay" className="Judgement">
+                        <p className='Title'>correct</p>
+                        <button
+                            //key={val.answer}
+                            className='modal__closeBtn'
+                            title="close"
+                            onClick={() => {
+                                setShow(false);
+                                setTfNumber(0);
+                                if(number==9){
+                                    setNumber(0)
+                                }else{setNumber(number+1)}
+                            }}
+                        >
+                            next
+                        </button>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div id="overlay" className="Judgement">
+                        <p className='Title'>wrong</p>
+                        <p className='answer'>The correct answer is...{questions[props.number][5].answer}</p>
+                        <p className='commentary'>{questions[props.number][6].commentary}</p>
+                        <button
+                            //key={val.answer}
+                            className='modal__closeBtn'
+                            title="close"
+                            onClick={() => {
+                                setShow(false);
+                                setTfNumber(0);
+                                if(number==9){
+                                    setNumber(0)
+                                }else{setNumber(number+1)}
+                            }}
+                        >
+                            next
+                        </button>
+                    </div>
+                )
+            }
+        } else {
             return null;
         }
     };
 
-    return(
-        <div className='choices-container'>
-            {choices.map((val)=>{
-                return(
-                        <>
-                        <button
-                            key={val.answer}
-                            className='choice'
-                            title={val.answer}
-                            onClick={() => {checkAnswer(val.correct); setShow(true)}}/>
-                        <Judgment correct={val.correct}/>
-                        </>
-                );
-            })}
-        </div>
+    return (
+        <>
+            <div className='choices-container'>
+                <button
+                    //key={val.answer}
+                    className='choice'
+                    title="a"
+                    onClick={() => { setShow(true); setTfNumber(tfNumber + 1); }}
+                >
+                    {questions[props.number][1].choice}
+                </button>
+                <button
+                    //key={val.answer}
+                    className='choice'
+                    title="b"
+                    onClick={() => { setShow(true); setTfNumber(tfNumber + 2); }}
+                >
+                    {questions[props.number][2].choice}
+                </button>
+                <button
+                    //key={val.answer}
+                    className='choice'
+                    title="c"
+                    onClick={() => { setShow(true); setTfNumber(tfNumber + 3); }}
+                >
+                    {questions[props.number][3].choice}
+                </button>
+                <button
+                    //key={val.answer}
+                    className='choice'
+                    title="d"
+                    onClick={() => { setShow(true); setTfNumber(tfNumber + 4); }}
+                >
+                    {questions[props.number][4].choice}
+                </button>
+            </div>
+            <Judgment />
+        </>
     );
 }
+
+export default Choice;

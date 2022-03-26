@@ -1,22 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import db from "../firebase";
-import {QuestionProps} from "./interface/components";
-import {collection,getDocs} from "firebase/firestore";
+import React from 'react';
+import { questions } from "./data";
 
-export default function Question(question: QuestionProps){
-    const [questions,setQuestions]=useState([]);
+type Props = {
+    number: number;
+}
 
-    /*useEffect(()=>{
-        const questionData = collection(db,"questions");
-        getDocs(questionData).then((snapShot)=> {
-            setQuestions(snapShot.docs.map((doc) => ({...doc.data()})));
-        });
-    },[]);*/
-
+const Question: React.FC<Props> = (props) => {
     return (
         <div className='question-container'>
-            <h1>Quiz</h1>
-            <h2>{questions.question}</h2>
+            <p className='Title'>Quiz</p>
+            <p className= 'question_sentence'>{questions[props.number][0].sentence}</p>
         </div>
     );
 }
+
+export default Question;

@@ -1,38 +1,31 @@
 import React from 'react';
-import './App.css';
+import './stylesheet.css';
 import Choice from './Choices'
 import { useState, useEffect } from 'react';
 import Question from "./Question";
-import { Problem } from './interface/models';
-import { AnswerProps } from './interface/components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-function App(props:AnswerProps) {
-    const { route } = props;
-
-    const [correct, setCorrect] = useState(false);
-    const [visible, setVisible] = useState(false);
-    const [last, setLast] = useState(false);
-    const [count, setCount] = useState(0);
-    const [correctCount, setCorrectCount] = useState(0);
-    const [questions] = useState<Problem[]>(route.params.props);
-
-    const checkAnswer = (flag: boolean) => {
-        if (flag) {
-            setCorrect(true);
-        } else {
-            setCorrect(false);
-        }
+export const Number = React.createContext(
+    {} as {
+        number: number
+        setNumber: React.Dispatch<React.SetStateAction<number>>
     }
+);
 
-  return (
-    <div className="App">
-            <Question questionText={questions[count].question}/>
-            <Choice choices={questions[count].choices} checkAnswer={checkAnswer}/>
-    </div>
-  );
+const App: React.FC = () => {
+
+    const [number, setNumber] = useState(0);
+    const value = {
+        number,
+        setNumber,
+    };
+
+    return (
+        <Number.Provider value={{ number, setNumber }}>
+            <Question number={number} />
+            <Choice number={number} />
+        </Number.Provider>
+    );
 }
 
 export default App;
-
