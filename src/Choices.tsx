@@ -1,5 +1,6 @@
 import React, { useState , useContext} from "react";
 import { questions } from "./data";
+import {Button} from "react-bootstrap";
 import {Number} from "./App";
 
 type Props = {
@@ -8,8 +9,11 @@ type Props = {
 
 const Choice: React.FC<Props> = (props) => {
     const [show, setShow] = useState(false);
+    const [result,setResult]=useState(false);
     const [tfNumber, setTfNumber] = useState(0);
     const { number, setNumber } = useContext(Number);
+    const [count,setCount]=useState(0);
+    const [correct,setCorrect] =useState(0);
 
 
     const Judgment = () => {
@@ -24,10 +28,13 @@ const Choice: React.FC<Props> = (props) => {
                             title="close"
                             onClick={() => {
                                 setShow(false);
+                                setCount(count+1);
+                                setCorrect(correct+1);
                                 setTfNumber(0);
-                                if(number==9){
-                                    setNumber(0)
-                                }else{setNumber(number+1)}
+                                setNumber(Math.floor(Math.random() * 9));
+                                if(count===4){
+                                    setResult(true);
+                                }
                             }}
                         >
                             next
@@ -47,10 +54,12 @@ const Choice: React.FC<Props> = (props) => {
                             title="close"
                             onClick={() => {
                                 setShow(false);
+                                setCount(count+1);
                                 setTfNumber(0);
-                                if(number==9){
-                                    setNumber(0)
-                                }else{setNumber(number+1)}
+                                setNumber(Math.floor(Math.random() * 9));
+                                if(count===4){
+                                    setResult(true);
+                                }
                             }}
                         >
                             next
@@ -63,43 +72,68 @@ const Choice: React.FC<Props> = (props) => {
         }
     };
 
+    const Result=()=>{
+        if(result){
+            return(
+                <div id="overlay" className="result">
+                    <div className="Title">Result</div>
+                    <div className="score">Your score is {correct} !</div>
+                    <button
+                        //key={val.answer}
+                        className='modal__closeBtn'
+                        title="close"
+                        onClick={() => {
+                            setResult(false);
+                            setCount(0);
+                            setCorrect(0);
+                        }}
+                    >
+                        close
+                    </button>
+                </div>
+            )}else{
+            return null;
+        }
+    };
+
     return (
         <>
             <div className='choices-container'>
-                <button
+                <Button
                     //key={val.answer}
                     className='choice'
                     title="a"
                     onClick={() => { setShow(true); setTfNumber(tfNumber + 1); }}
                 >
                     {questions[props.number][1].choice}
-                </button>
-                <button
+                </Button>
+                <Button
                     //key={val.answer}
                     className='choice'
                     title="b"
                     onClick={() => { setShow(true); setTfNumber(tfNumber + 2); }}
                 >
                     {questions[props.number][2].choice}
-                </button>
-                <button
+                </Button>
+                <Button
                     //key={val.answer}
                     className='choice'
                     title="c"
                     onClick={() => { setShow(true); setTfNumber(tfNumber + 3); }}
                 >
                     {questions[props.number][3].choice}
-                </button>
-                <button
+                </Button>
+                <Button
                     //key={val.answer}
                     className='choice'
                     title="d"
                     onClick={() => { setShow(true); setTfNumber(tfNumber + 4); }}
                 >
                     {questions[props.number][4].choice}
-                </button>
+                </Button>
             </div>
             <Judgment />
+            <Result/>
         </>
     );
 }
