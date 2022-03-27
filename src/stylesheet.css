@@ -84,7 +84,35 @@
 
 .modal__closeBtn{
     margin-top: 200px;
+    width: 100px;
     color: #1a1713;
+    background-color: #f5dcc4;
+    border-radius: 14px;
     font-family: Prata;
-    font-size: 14px;
+    font-size: 25px;
+}
+
+.result{
+    background-color: #f4ede6;
+    max-width: inherit;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score{
+    font-family: Prata;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 25px;
+    color: #1a1713;
 }

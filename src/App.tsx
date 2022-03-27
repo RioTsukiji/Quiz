@@ -14,7 +14,7 @@ export const Number = React.createContext(
 
 const App: React.FC = () => {
 
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState(Math.floor(Math.random() * 9));
     const value = {
         number,
         setNumber,
